@@ -1,6 +1,39 @@
-- name: Deploy
-  uses: JamesIves/github-pages-deploy-action@v4
-  with:
-    branch: gh-pages
-    folder: dist
-    token: ${{ secrets.GH_PAT }}
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3. Install Dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Build and Deploy to GitHub Pages
+      - name: Build and Deploy 🚀
+        run: |
+          # Git-Config für CI-Umgebung
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+          # Remote-URL mit integriertem GITHUB_TOKEN setzen
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          # Build und Deploy ausführen
+          npm run deploy
