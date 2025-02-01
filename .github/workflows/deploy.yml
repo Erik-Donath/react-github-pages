@@ -27,6 +27,8 @@ jobs:
 
       # 4. Build and Deploy to GitHub Pages
       - name: Build and Deploy 🚀
+        env:
+          VITE_COUNTER: ${{ secrets.COUNTER }}
         run: |
           # Git-Config für CI-Umgebung
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
