@@ -1,7 +1,7 @@
 {
-  "name": "test",
-  "description": "Hello World App",
-  "homepage": "https://erik-donath.github.io/test",
+  "name": "react-github-pages",
+  "description": "React Github Pages",
+  "homepage": "https://erik-donath.github.io/react-github-pages",
   "private": true,
   "version": "0.0.0",
   "type": "module",
